@@ -1,0 +1,121 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title mode=ios>
+			<ion-img src="assets/image/logo.png" alt="HERITAGE SHELF"></ion-img>
+		</ion-title>
+	</ion-toolbar> 
+	<ion-toolbar color="primary">
+		<ion-searchbar #search class="ion-no-padding" placeholder="Search 1000+ products" (ionInput)="searchProduct($event)"></ion-searchbar>
+	</ion-toolbar> 
+</ion-header>
+
+<ion-content class="container">
+	<div class="products" *ngIf="products">
+		<div class="product" *ngFor="let product of products">
+			<ion-grid class="ion-no-padding">
+				<ion-row>
+					<ion-col size="6" class="ion-text-center" (click)="openProduct(product)">
+						<div *ngIf="product.price.discount!=0">
+							<ion-button size="small" class="offer">
+								{{ product.price.discount }}% off
+							</ion-button><br>
+						</div>
+						<img [src]="product.image">
+					</ion-col>
+					<ion-col size="6">
+						<div class="item" (click)="openProduct(product)">
+							<span class="category">{{ product.category.category_name }}</span>
+							<p class="product_name">{{ product.product_name }}</p>
+							<span class="unit" *ngIf="product.product_prices?.length!=1">
+								{{ product.price.unit.unit_name }}
+							</span>
+							<p>
+								<span class="mrp-tag">MRP</span>
+								<span class="mrp" *ngIf="product.price.discount!=0">
+									₹{{ (product.price.mrp*1).toFixed(2) }}
+								</span>
+								<span class="price">₹{{ (product.price.selling_price*1).toFixed(2) }}</span>
+							</p>
+						</div>
+						<div class="quantity" *ngIf="!cart.findItem(product.price)">
+							<ion-button size="small" class="cart-button" (click)="cart.addToCart(product,product.price)">
+								<ion-icon name="add"></ion-icon> Add
+							</ion-button>
+						</div>
+						
+						<div class="quantity" *ngIf="cart.findItem(product.price)">
+							<ion-button size="small" class="cart-button" (click)="cart.removeQuantity(product.price)">
+								<ion-icon name="remove-outline"></ion-icon>
+							</ion-button>
+							<ion-button size="small" fill="outline" class="cart-button" disabled>
+								<ion-text>{{ cart.quantity(product.price) }}</ion-text>
+							</ion-button>
+							<ion-button size="small" class="cart-button" (click)="cart.addQuantity(product.price)"> 
+								<ion-icon name="add-outline"></ion-icon>
+							</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+		<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreProducts($event)" [disabled]="page==last_page">
+			<ion-infinite-scroll-content
+			  loadingSpinner="bubbles"
+			  loadingText="Loading Data.....">
+			</ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+	<div class="products" *ngIf="!products">
+		<div class="product" *ngFor="let fake of fakes">
+			<ion-grid class="ion-no-padding">
+				<ion-row>
+					<ion-col size="6" class="ion-text-center">
+						<ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+						<ion-skeleton-text animated style="width: 90%; height: 80px;"></ion-skeleton-text>
+					</ion-col>
+					<ion-col size="6">
+						<span class="category">
+							<ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+						</span>
+						<p class="product_name">
+							<ion-skeleton-text animated style="width: 100%; height: 35px;"></ion-skeleton-text>
+						</p>
+						<span class="unit">
+							<ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+						</span>
+						<p>
+							<ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+						</p>
+						<ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</div>
+	<div *ngIf="products?.length==0">
+		<div id="container">
+			<img src="./assets/image/no-data.png">
+			<p>No data found</p>
+			<span>Please check back later !...</span>
+		</div>
+    </div>
+</ion-content>
+
+<ion-footer>
+	<ion-grid class="ion-no-padding">
+		<ion-row>
+			<ion-col size="7" class="ion-text-left">
+				<div class="items">{{ cart.cartItems() }} Items - ₹{{ cart.cartValue() }}</div>
+				<div class="saved">You Saved - ₹{{ cart.savings() }}</div>
+			</ion-col>
+			<ion-col size="5" class="ion-text-right">
+				<ion-button expand="block" [routerLink]="['/tabs/cart']">
+					View Shelf
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-footer>
+
+
+

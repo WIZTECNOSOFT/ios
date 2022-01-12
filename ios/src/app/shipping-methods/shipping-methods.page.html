@@ -1,0 +1,65 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Delivery Options</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<div class="address" *ngIf="order.address">
+		<ion-grid class="ion-no-padding">
+			<ion-row class="heading">
+				<ion-col size="6" class="ion-text-start">
+					<span class="title">Delivery to : {{ order.address.address_type }}</span>
+				</ion-col>
+				<ion-col size="6" class="ion-text-end" [routerLink]="['/addresses']">
+					<span class="caption">Change</span>
+				</ion-col>
+			</ion-row>
+			<ion-row class="address">
+				<ion-col size="12" class="ion-text-start">
+					{{ order.address.address }}
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	<ion-list class="shipping-method" lines="none">
+		<ion-radio-group [(ngModel)]="order.shipping_method_id">
+			<ion-list-header>
+      			<ion-label>Select Delivery Method</ion-label>
+    		</ion-list-header>
+			<ion-item *ngFor="let shipping_method of shipping_methods" (click)="selectShippingMethod(shipping_method)">
+				<ion-radio slot="start" [value]="shipping_method.shipping_method_id"></ion-radio>
+				<ion-label class="ion-text-wrap">{{ shipping_method.shipping_method_name }}</ion-label>
+				<ion-text slot="end">₹{{ shipping_method.shipping_amount }}</ion-text>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+	<ion-list class="input-list" lines="full">
+		<ion-list-header>
+			<ion-label>Select Delivery Date</ion-label>
+	  	</ion-list-header>
+		<ion-item class="input-item">
+			<ion-icon name="calendar" slot="start"></ion-icon>
+			<ion-label position="floating">Delivery Date</ion-label>
+			<ion-datetime displayFormat="DD-MM-YYYY" [min]="today" [(ngModel)]="order.delivery_date" (ionChange)="getShippingSlabs()" [disabled]="!shipping_slabs || shipping_slabs?.length==0"></ion-datetime>
+		</ion-item>
+	</ion-list>
+	<ion-list class="shipping-method" lines="none" *ngIf="shipping_slabs && shipping_slabs?.length!=0">
+		<ion-radio-group [(ngModel)]="order.shipping_slab_id">
+			<ion-list-header>
+				<ion-label>Select Delivery Slab</ion-label>
+		  	</ion-list-header>
+			<ion-item *ngFor="let shipping_slab of shipping_slabs" [class]="shipping_slab.class" (click)="selectShippingSlab(shipping_slab)">
+				<ion-radio slot="start" [disabled]="shipping_slab.disabled" [value]="shipping_slab.shipping_slab_id"></ion-radio>
+				<ion-label class="ion-text-wrap">{{ shipping_slab.slab.slab_name }}</ion-label>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+
+	<div class="proceed-payment">
+		<ion-button class="btn" (click)="proceed()" expand="block">Proceed to Pay</ion-button>
+	</div>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>My Orders</ion-title>
+	</ion-toolbar>
+	<ion-searchbar class="ion-no-padding" (ionInput)="searchOrder($event)" autocorrect="off" placeholder="Search for order"></ion-searchbar>  
+</ion-header>
+
+<ion-content class="container">
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	<div *ngIf="orders">
+		<ion-card class="order" *ngFor="let order of orders" (click)="openOrder(order)">
+			<ion-card-content>
+				<ion-row>
+					<ion-col size="8">
+						<h2>{{ order.order_no }} - {{ convertTime(order.order_date) }}</h2>
+						<span *ngIf="order.order_status">
+							Status : {{ order.order_status.status.status_name }}
+						</span>
+					</ion-col>
+					<ion-col size="4" class="ion-text-right">
+						<h1>₹{{ order.grand_total }}</h1>
+					</ion-col>
+				</ion-row>
+			</ion-card-content>
+		</ion-card>
+		<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)" [disabled]="page==last_page">
+			<ion-infinite-scroll-content
+			  loadingSpinner="bubbles"
+			  loadingText="Loading Data.....">
+			</ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+	<div *ngIf="!orders">
+		<ion-card class="order" *ngFor="let fake of fakes">
+			<ion-card-content>
+				<ion-row>
+					<ion-col size="12">
+						<h2>
+							<ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+						</h2>
+						<span>
+							<ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+						</span>
+					</ion-col>
+				</ion-row>
+				
+			</ion-card-content>
+		</ion-card>
+	</div>
+	<div *ngIf="orders?.length==0">
+		<div id="container">
+			<img src="./assets/image/no-data.png">
+			<p>No data found</p>
+			<span>Your Order List is Empty !...</span>
+		</div>
+    </div>
+</ion-content>

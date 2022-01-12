@@ -1,0 +1,29 @@
+<ion-tabs>
+	<ion-tab-bar slot="bottom">
+		<ion-tab-button tab="home">
+			<ion-icon name="home"></ion-icon>
+			<ion-label>Home</ion-label>
+		</ion-tab-button>
+	
+		<ion-tab-button tab="search">
+			<ion-icon name="search"></ion-icon>
+			<ion-label>Search</ion-label>
+		</ion-tab-button>
+	
+		<ion-tab-button tab="categories">
+			<ion-icon name="apps"></ion-icon>
+			<ion-label>Categories</ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button tab="cart">
+			<ion-badge color="primary">{{ cart.cartItems() }}</ion-badge>
+			<ion-icon name="cart"></ion-icon>
+			<ion-label>My Shelf</ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button tab="account">
+			<ion-icon name="person"></ion-icon>
+			<ion-label>Account</ion-label>
+		</ion-tab-button>
+	</ion-tab-bar>
+</ion-tabs>

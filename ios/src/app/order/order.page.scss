@@ -1,0 +1,133 @@
+:host {
+	--page-margin: var(--app-fair-margin);
+	--page-background: var(--ion-color-medium-light);
+}
+
+.container {
+	--background: var(--page-background);
+	--padding-start: var(--page-margin);
+	--padding-end: var(--page-margin);
+	--padding-top: var(--page-margin);
+	--padding-bottom: var(--page-margin);
+}
+
+ion-title {
+	padding:0px;
+}
+
+.address {
+	margin-bottom: 10px;
+	.heading {
+		margin-top: 5px;
+		margin-bottom: 5px;
+		.title {
+			font-size: 18px;
+			font-weight: bold;
+			color:var(--ion-color-dark);
+		}
+		.caption {
+			font-size: 16px;
+			color:var(--ion-color-primary);
+		}
+	}
+
+	.address {
+		background: var(--ion-color-white);
+		color:var(--ion-color-dark);
+		padding: 10px;
+		border-radius: var(--app-small-radius);
+
+		span{
+			color:var(--ion-color-dark);
+			margin-bottom: 15px;
+			font-size: 16px;
+		}
+
+		div{
+			color:var(--ion-color-medium);
+			font-size: 16px;
+		}
+	}
+}
+
+.products {
+	background-color: #fff;
+	margin-bottom: 10px;
+	border-radius: var(--app-small-radius);
+	.product {
+        padding: 10px;
+		border-bottom: 1px solid var(--ion-color-medium-light);
+        img {
+            height: 80px;
+        }
+
+        .offer {
+            --border-radius: 50px;
+            height: 20px;
+			text-transform: initial;
+        }
+
+        .category {
+            font-size: 12px;
+            color: var(--ion-color-medium);
+        }
+
+        p {
+            margin-top: 0px;
+            margin-bottom: 5px;
+        }
+
+        .product_name {
+            font-size: 16px;
+            color: var(--ion-color-dark);
+            font-weight: bold;
+        }
+
+        .unit {
+            font-size: 14px;
+            color: var(--ion-color-medium);
+        }
+
+		.mrp-tag {
+            font-size: 15px;
+            color: var(--ion-color-danger);
+			font-weight: 600;
+        }
+
+        .mrp {
+			padding-left: 5px;
+            font-size: 15px;
+			text-decoration: line-through;
+            color: var(--ion-color-danger);
+			font-weight: 600;
+        }
+
+        .price {
+            padding-left: 10px;
+            font-size: 15px;
+			font-weight: 600;
+        }
+
+        .cart-button {
+            --border-radius: 50px;
+            height: 20px;
+			text-transform: initial;
+			font-weight: bold;
+			font-size: 14px;
+        }
+    }
+}
+
+.total {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border-radius: var(--app-small-radius);
+	ion-item {
+		border-bottom: 1px solid var(--ion-color-medium-light);
+	}
+
+	.value {
+		color: var(--ion-color-success);
+		font-weight: bold;
+	}
+}

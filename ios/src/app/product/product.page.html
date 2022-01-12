@@ -1,0 +1,104 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{ product.product_name }}
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<div class="products">
+		<div class="product">
+			<ion-grid class="ion-no-padding">
+				<ion-row>
+					<ion-col size="12">
+						<p class="product_name">{{ product.product_name }}</p>
+						<span class="category">{{ product.category.category_name }}</span>
+					</ion-col>
+					
+					<ion-col size="12" class="ion-text-center">
+						<img [src]="product.image"><br>
+						<div *ngIf="product.price.discount!=0">
+							<ion-button size="small" class="offer">
+								{{ product.price.discount }}% off
+							</ion-button><br>
+						</div>
+					</ion-col>
+
+					<ion-col size="7">
+						<span class="unit" *ngIf="product.product_prices?.length!=1">
+							{{ product.price.unit.unit_name }}
+						</span>
+						<p>
+							<span class="mrp-tag">MRP</span>
+							<span class="mrp" *ngIf="product.price.discount!=0">
+								₹{{ (product.price.mrp*1).toFixed(2) }}
+							</span>
+							<span class="price">₹{{ (product.price.selling_price*1).toFixed(2) }}</span>
+						</p>
+						<span class="tag">(Inclusive of all taxes)</span>
+					</ion-col>
+					<ion-col size="5" class="ion-text-end">
+						<span class="stock">In Stock</span>
+						<div class="quantity" *ngIf="!cart.findItem(product.price)">
+							<ion-button size="small" class="cart-button" (click)="cart.addToCart(product,product.price)">
+								<ion-icon name="add"></ion-icon> Add
+							</ion-button>
+						</div>
+						<div class="quantity" *ngIf="cart.findItem(product.price)">
+							<ion-button size="small" class="cart-button" (click)="cart.removeQuantity(product.price)">
+								<ion-icon name="remove-outline"></ion-icon>
+							</ion-button>
+							<ion-button size="small" fill="outline" class="cart-button" disabled>
+								<ion-text>{{ cart.quantity(product.price) }}</ion-text>
+							</ion-button>
+							<ion-button size="small" class="cart-button" (click)="cart.addQuantity(product.price)"> 
+								<ion-icon name="add-outline"></ion-icon>
+							</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+			<div class="unit" *ngIf="product.product_prices?.length>1">
+				<div class="line"></div>
+				<ion-list lines="full">
+					<ion-list-header>
+						<ion-label>Units</ion-label>
+					</ion-list-header>
+					<ion-radio-group [(ngModel)]="product_price_id">
+						<ion-item *ngFor="let product_price of product.product_prices" (click)="SelectProductPrice(product_price)">
+							<ion-radio slot="start" [value]="product_price.product_price_id"></ion-radio>
+							<ion-label>
+								<span class="price_unit">{{ product_price.unit.unit_name }}</span>
+								<span class="mrp-tag">MRP</span>
+								<span class="mrp" *ngIf="product_price.discount!=0">
+									₹{{ (product_price.mrp*1).toFixed(2) }}
+								</span>
+								<span class="price">₹{{ (product_price.selling_price*1).toFixed(2) }}</span>
+							</ion-label>
+						</ion-item>
+					</ion-radio-group>
+				</ion-list>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<ion-grid class="ion-no-padding">
+		<ion-row>
+			<ion-col size="7" class="ion-text-left">
+				<div class="items">{{ cart.cartItems() }} Items - ₹{{ cart.cartValue() }}</div>
+				<div class="saved">You Saved - ₹{{ cart.savings() }}</div>
+			</ion-col>
+			<ion-col size="5" class="ion-text-right">
+				<ion-button expand="block" [routerLink]="['/tabs/cart']">
+					View Shelf
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

@@ -1,0 +1,49 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+		  <ion-back-button></ion-back-button>
+	  </ion-buttons>
+	  <ion-title>Address</ion-title>
+	</ion-toolbar>
+	<div *ngIf="location_status==1">
+		<ion-searchbar class="ion-no-padding" [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+		<ion-list [hidden]="autocompleteItems.length == 0" lines="full">
+			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+				{{ item.description }}
+			</ion-item>
+		</ion-list> 
+	</div>
+</ion-header>
+
+<ion-content *ngIf="location_status==1">
+	<ion-fab vertical="bottom" horizontal="end">
+		<ion-fab-button (click)="checkGPSPermission()" ion-fab color="primary">
+			<ion-icon name="locate-outline"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	<div class="map-wrapper">  
+		<div id="map_center">
+			<ion-icon name="pin" size="large" color="danger"></ion-icon>      
+		</div>
+		<div #map id="map"></div>
+	</div> 
+</ion-content>
+
+<ion-content class="container" *ngIf="location_status==0">
+	<p style="text-align: center; margin-top: 120px;">
+		<ion-icon color="primary" style="font-size: 50px;" name="location"></ion-icon><br>
+		Please enable location & restart the app to continue
+	</p>
+	<ion-button class="btn" (click)="checkGPSPermission()" fill="outline" expand="block">Check</ion-button>
+</ion-content>
+
+<ion-footer class="address-wrapper" *ngIf="location_status==1">
+	<div class="text">Your Location</div>
+	<div class="ion-text-wrap">{{ locationCoords.address }}</div>
+	<div class="address-button">
+		<ion-button class="btn" expand="block" (click)="confirmAddress()">
+			<span *ngIf="locationCoords.address!=''">Confirm Address</span> 
+			<span *ngIf="locationCoords.address==''">Enter Address</span> 
+		</ion-button>
+	</div>
+</ion-footer>

@@ -1,0 +1,52 @@
+:host {
+	--page-margin: var(--app-small-margin);
+	--page-background: var(--ion-color-medium-light);
+}
+
+.container {
+	--background: var(--page-background);
+	--padding-start: var(--page-margin);
+	--padding-end: var(--page-margin);
+	--padding-top: var(--page-margin);
+	--padding-bottom: var(--page-margin);
+}
+
+ion-title {
+	padding:0px;
+}
+
+.order {
+	margin: 0px;
+	box-shadow: none;
+	border-radius: 12px;
+	border: 5px solid var(--ion-color-medium-light);
+
+	ion-card-content {
+		padding:5px;
+        h2 {
+            font-weight:bold;
+			font-size: 16px;
+			text-transform: capitalize;
+			color:var(--ion-color-dark);
+        }
+        span {
+            font-size:14px;
+			color:var(--ion-color-medium);
+        }
+
+		h1 {
+            font-weight:bold;
+			font-size: 16px;
+			text-transform: capitalize;
+			color:var(--ion-color-danger);
+			margin-top: 10px;
+        }
+
+        ion-badge {
+            margin-top: 7px;
+            border-radius: 12px;
+            padding: 8px;
+            font-size: 14px;
+        }
+	}
+}

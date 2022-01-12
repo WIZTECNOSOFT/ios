@@ -1,0 +1,40 @@
+:host {
+	--page-margin: var(--app-fair-margin);
+	--page-background: var(--ion-color-medium-light);
+}
+
+.container {
+	--background: var(--page-background);
+	--padding-start: var(--page-margin);
+	--padding-end: var(--page-margin);
+	--padding-top: var(--page-margin);
+	--padding-bottom: var(--page-margin);
+}
+
+ion-title {
+	padding:0px;
+}
+
+.address {
+	background: var(--ion-background);
+	ion-item {
+		margin-bottom: 10px;
+		border-radius: var(--app-small-radius);
+	}
+
+	ion-fab-button {
+		padding: 0px;
+	}
+
+	.address_type{
+		color: var(--ion-color-dark);
+		font-size: 16px;
+		font-weight: bold;
+	}
+	
+	.address{
+		margin-top: 2px; 
+		font-size: 14px;
+		color: var(--ion-color-medium);
+	}
+}

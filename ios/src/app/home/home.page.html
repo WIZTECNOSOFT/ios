@@ -1,0 +1,77 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title mode=ios>
+			<ion-img src="assets/image/logo.png" alt="HERITAGE SHELF"></ion-img>
+		</ion-title>
+	</ion-toolbar> 
+	<ion-toolbar color="primary" [routerLink]="['/tabs/search']">
+		<ion-searchbar class="ion-no-padding" placeholder="Search 1000+ products"></ion-searchbar>
+	</ion-toolbar> 
+</ion-header>
+
+<ion-content class="container">
+	<!-- default sliders -->
+	<div *ngIf="sliders">
+		<div *ngFor="let slider of sliders">
+			<div class="slider" *ngIf="slider.is_default">
+				<ion-img [src]="slider.image"></ion-img>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!sliders">
+		<div class="slider">
+			<ion-skeleton-text animated style="width: 100%; height: 150px;"></ion-skeleton-text>
+		</div>
+	</div>
+
+	<!-- Category Title -->
+	<div class="title">
+		<ion-grid class="ion-no-padding">
+			<ion-row class="heading">
+				<ion-col size="6" class="ion-text-start">
+					<span class="title">Shop by Category</span>
+				</ion-col>
+				<ion-col size="6" class="ion-text-end" [routerLink]="['/tabs/categories']">
+					<span class="caption">View More</span>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+
+	<!-- Categories -->
+	<div class="categories" *ngIf="categories">
+		<ion-grid class="ion-no-padding">
+			<ion-row>
+				<ion-col size="4" class="ion-text-center" *ngFor="let category of categories" (click)="openSubCategories(category)">
+					<img [src]="category.image">
+					<span class="category_name">{{ category.category_name }}</span>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	<div class="categories" *ngIf="!categories">
+		<ion-grid class="ion-no-padding">
+			<ion-row>
+				<ion-col size="4" class="ion-text-center" *ngFor="let category of dummy_categories">
+					<ion-skeleton-text animated style="width: 100%; height: 100px;"></ion-skeleton-text>
+					<ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	
+	<!-- Remaining Sliders -->
+	<div *ngIf="sliders">
+		<div *ngFor="let slider of sliders">
+			<div class="slider" *ngIf="!slider.is_default">
+				<ion-img [src]="slider.image"></ion-img>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!sliders">
+		<div class="slider" *ngFor="let slider of dummy_sliders">
+			<ion-skeleton-text animated style="width: 100%; height: 150px;"></ion-skeleton-text>
+		</div>
+	</div>
+	
+	</ion-content>

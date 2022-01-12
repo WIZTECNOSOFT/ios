@@ -1,0 +1,79 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			<span>Welcome</span>
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid class="container">
+		<div class="pages-container" >
+			<p class="pages">All pages:</p>
+		</div>
+		<div class="pages-list" style="padding: 0%; background-color:transparent;">
+			<ion-list>
+				<ion-item button [routerLink]="['/login']">
+					<ion-label>Login</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+				<ion-item button [routerLink]="['/otp']">
+					<ion-label>OTP</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+				<ion-item button [routerLink]="['/register']">
+					<ion-label>Register</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+				<ion-item button [routerLink]="['/tabs/home']">
+					<ion-label>Home</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/tabs/categories']">
+					<ion-label>Categories</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/products']">
+					<ion-label>Products</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button (click)="goToProduct()">
+					<ion-label>Product</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/my-shelf']">
+					<ion-label>My Shelf</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/addresses']">
+					<ion-label>Addresses</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/address']">
+					<ion-label>Map</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+				
+				<ion-item button [routerLink]="['/payment-methods']">
+					<ion-label>Payment Method</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+
+				<ion-item button [routerLink]="['/shipping-methods']">
+					<ion-label>Shipping Method</ion-label>
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+			</ion-list>
+		</div>
+	</ion-grid>
+	
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>My Profile</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<div class="avatar">
+		<img src="./assets/image/round_logo.png" alt="Heritage Shelf">
+	</div>
+	<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+		<ion-list class="inputs-list" lines="full">
+			<ion-item class="input-item">
+				<ion-icon name="people" slot="start"></ion-icon>
+				<ion-label position="floating">Name</ion-label>
+				<ion-input type="text" formControlName="name"></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.name">
+					<div class="error-message"
+						*ngIf="profileForm.get('name').hasError(validation.type) && (profileForm.get('name').dirty || profileForm.get('name').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+		</ion-list>
+
+		<ion-list class="inputs-list" lines="full">
+			<ion-item class="input-item">
+				<ion-icon name="mail" slot="start"></ion-icon>
+				<ion-label position="floating">Email</ion-label>
+				<ion-input type="email" formControlName="email"></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.email">
+					<div class="error-message"
+						*ngIf="profileForm.get('email').hasError(validation.type) && (profileForm.get('email').dirty || profileForm.get('email').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+		</ion-list>
+
+		<ion-list class="inputs-list" lines="full">
+			<ion-item class="input-item">
+				<ion-icon name="call" slot="start"></ion-icon>
+				<ion-label position="floating">Mobile Number</ion-label>
+				<ion-input type="number" formControlName="mobile_no"></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.mobile_no">
+					<div class="error-message"
+						*ngIf="profileForm.get('mobile_no').hasError(validation.type) && (profileForm.get('mobile_no').dirty || profileForm.get('mobile_no').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+		</ion-list>
+		<ion-button class="btn" type="submit" expand="block" [disabled]="!profileForm.valid">Update</ion-button>
+	</form>
+</ion-content>

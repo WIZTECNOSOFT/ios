@@ -1,0 +1,48 @@
+:host {
+	--page-margin: var(--app-fair-margin);
+	--page-background: var(--ion-color-white);
+}
+
+.container {
+	--background: var(--page-background);
+	--padding-start: var(--page-margin);
+	--padding-end: var(--page-margin);
+	--padding-top: var(--page-margin);
+	--padding-bottom: var(--page-margin);
+}
+
+ion-title {
+	padding: 0px;
+}
+.map-wrapper {
+	height: 100%;
+  	position: relative;
+ 
+	#map_center {
+		position: absolute;
+		z-index: 99;
+		height: 40px;
+		width: 40px;
+		top: 50%;
+		left: 50%;
+		margin-left: -21px;
+		margin-top: -41px;
+	}
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+
+.address-wrapper {
+	padding: 10px 15px 5px 15px;
+	.text {
+		font-size: 18px;
+		font-weight: bold;
+	}
+}
+
+.address-button {
+    margin-top: 10px;
+}

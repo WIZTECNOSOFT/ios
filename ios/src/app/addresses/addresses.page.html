@@ -1,0 +1,57 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>My Address</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<ion-fab vertical="bottom" horizontal="end">
+		<ion-fab-button [routerLink]="['/map']" ion-fab color="primary">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+
+	<ion-list class="address" lines="none" *ngIf="addresses">
+		<ion-radio-group [(ngModel)]="order.address_id">
+			<ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
+				<ion-radio slot="start" [value]="address.address_id" *ngIf="mode=='select'"></ion-radio>
+				<ion-label class="ion-text-wrap">
+					<div class="address_type">{{ address.address_type }}</div>
+					<div class="address">
+						{{ address.address }}
+					</div>
+				</ion-label>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+
+	<ion-list class="address" lines="none" *ngIf="!addresses">
+		<ion-radio-group>
+			<ion-item *ngFor="let fake of fakes">
+				<ion-label class="ion-text-wrap">
+					<div class="address_type">
+						<ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+					</div>
+					<div class="address">
+						<ion-skeleton-text animated style="width: 100%; height: 80px;"></ion-skeleton-text>
+					</div>
+				</ion-label>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+
+	<div *ngIf="addresses?.length==0">
+		<div id="container">
+			<img src="./assets/image/no-data.png">
+			<p>No data found</p>
+			<span>click on add(+) button to add address !...</span>
+		</div>
+    </div>
+
+	<div class="shipping-method" *ngIf="addresses?.length!=0 && mode=='select'">
+		<ion-button (click)="proceed()" class="btn" expand="block">Proceed to Delivery</ion-button>
+	</div>
+</ion-content>

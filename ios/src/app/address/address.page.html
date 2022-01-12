@@ -1,0 +1,86 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+		  	<ion-back-button></ion-back-button>
+	  	</ion-buttons>
+	  	<ion-title>New Address</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
+		<ion-list class="inputs-list" lines="full">
+			<ion-item class="input-item">
+				<ion-icon name="list" slot="start"></ion-icon>
+				<ion-label position="floating">Address Type</ion-label>
+				<ion-select formControlName="address_type">
+					<ion-select-option>Home</ion-select-option>
+					<ion-select-option>Work</ion-select-option>
+					<ion-select-option>Others</ion-select-option>
+				</ion-select>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.address_type">
+					<div class="error-message" *ngIf="addressForm.get('address_type').hasError(validation.type) && (addressForm.get('address_type').dirty || addressForm.get('address_type').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+			<div class="error-container" *ngIf="errors && errors.address_type">
+				<ng-container>
+					<div class="error-message">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ errors.address_type[0] }}</span>
+					</div>
+				</ng-container>
+			</div>
+
+			<ion-item class="input-item">
+				<ion-icon name="text" slot="start"></ion-icon>
+				<ion-label position="floating">Address</ion-label>
+				<ion-textarea rows="4" formControlName="address"></ion-textarea>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.address">
+					<div class="error-message" *ngIf="addressForm.get('address').hasError(validation.type) && (addressForm.get('address').dirty || addressForm.get('address').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+			<div class="error-container" *ngIf="errors && errors.address">
+				<ng-container>
+					<div class="error-message">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ errors.address[0] }}</span>
+					</div>
+				</ng-container>
+			</div>
+
+			<ion-item class="input-item">
+				<ion-icon name="keypad" slot="start"></ion-icon>
+				<ion-label position="floating">Pincode</ion-label>
+				<ion-input type="number" maxlength="6" formControlName="pincode"></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.pincode">
+					<div class="error-message" *ngIf="addressForm.get('pincode').hasError(validation.type) && (addressForm.get('pincode').dirty || addressForm.get('pincode').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+			<div class="error-container" *ngIf="errors && errors.pincode">
+				<ng-container>
+					<div class="error-message">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ errors.pincode[0] }}</span>
+					</div>
+				</ng-container>
+			</div>
+		</ion-list>
+		<ion-button class="btn" type="submit" expand="block" [disabled]="!addressForm.valid">Submit</ion-button>
+	</form>
+</ion-content>
+

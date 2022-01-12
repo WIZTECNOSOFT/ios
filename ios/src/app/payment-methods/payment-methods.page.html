@@ -1,0 +1,70 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Payment</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+	<ion-list class="payment-method" lines="none">
+		<ion-radio-group [(ngModel)]="order.payment_method_id">
+			<ion-list-header>
+      			<ion-label>Select Payment Mode</ion-label>
+    		</ion-list-header>
+			<ion-item *ngFor="let payment_method of payment_methods" (click)="selectPaymentMethod(payment_method)">
+				<ion-radio slot="start" [value]="payment_method.payment_method_id"></ion-radio>
+				<ion-label class="ion-text-wrap">{{ payment_method.payment_method_name }}</ion-label>
+			</ion-item>
+			</ion-radio-group>
+	</ion-list>
+
+	<ion-list class="total" lines="none">
+		<ion-item>
+			<ion-text class="text" slot="start">Sub Total</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.sub_total }}
+			</ion-text>
+		</ion-item>
+
+		<ion-item>
+			<ion-text class="text" slot="start">Tax</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.tax_amount }}
+			</ion-text>
+		</ion-item>
+
+		<ion-item>
+			<ion-text class="text" slot="start">You Saved</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.discount_amount }}
+			</ion-text>
+		</ion-item>
+
+		<ion-item>
+			<ion-text class="text" slot="start">Shelf Value</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.total_amount }}
+			</ion-text>
+		</ion-item>
+
+		<ion-item>
+			<ion-text class="text" slot="start">Delivery Charge</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.shipping_amount }}
+			</ion-text>
+		</ion-item>
+
+		<ion-item>
+			<ion-text class="text" slot="start">Total Amount Payable</ion-text>
+			<ion-text class="value" slot="end">
+				₹{{ order.grand_total }}
+			</ion-text>
+		</ion-item>
+	</ion-list>
+
+	<div class="place-order">
+		<ion-button class="btn" (click)="checkOrder()" expand="block">Place Order</ion-button>
+	</div>
+</ion-content>

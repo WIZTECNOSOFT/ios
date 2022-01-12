@@ -1,0 +1,33 @@
+:host {
+	--page-margin: var(--app-fair-margin);
+	--page-background: var(--ion-color-white);
+}
+
+.container {
+	--background: var(--page-background);
+	--padding-start: var(--page-margin);
+	--padding-end: var(--page-margin);
+	--padding-top: var(--page-margin);
+	--padding-bottom: var(--page-margin);
+}
+
+ion-title {
+	padding:0px;
+}
+
+.avatar {
+	position: relative;
+	display: flex;
+	padding-top: var(--ion-safe-area-top);
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: var(--page-background);
+	border-radius: 0 0 var(--app-fair-radius) var(--app-fair-radius); 
+	height: calc(200px + var(--ion-safe-area-top));
+
+	img {
+		width: 150px;
+		margin-top: calc(-1 * var(--ion-safe-area-top));
+	}
+}
